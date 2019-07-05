@@ -1,0 +1,23 @@
+n, m, k=(int(i) for i in input().split())                              # input number of rows, columns and bombs
+a=[[0 for j in range(m)] for i in range(n)]                            # create 0 list with n rows and n columns 
+for i in range(k):                                                     # loop with k bombs
+    row, col=(int(i)-1 for i in input().split())                       # loading bombs in coordinates
+    a[row][col]=-1                                                     # it is -1 where bomb
+for i in range(n):                                                     # loop n rows
+    for j in range(m):                                                 # loop m columns
+        if a[i][j]==0:                                                 # if there is no bomb
+            for di in range(-1,2):                                     # loop in i dimension
+                for dj in range(-1,2):                                 # loop in j dimension
+                    ai=i+di                                            # looking for neighboor in i dimension
+                    aj=j+dj                                            # looking for neighboor in j dimension                
+                    if 0<=ai<n and 0<=aj<m and a[ai][aj]==-1:          # if bomb is near
+                        a[i][j]+=1                                     # add 1
+for i in range(n):                                                     # loop n rows
+    for j in range(m):                                                 # loop m columns
+        if a[i][j]==-1:                                                # if there is bomb
+            print('*',end='')                                          # print '*' symbol, line is continuing
+        elif a[i][j]==0:                                               # if there is no bomb
+            print('.',end='')                                          # print '.' symbol, line is continuing
+        else:                                                          # else
+            print(a[i][j],end='')                                      # print the number of bombs near this cell
+    print()                                                            # endline
